@@ -8,9 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: registry.opensuse.org/opensuse/bci/python:3.11
+      env:
+        LINUX_GIT: /linux
       options:  -w /test
       volumes:
         - ${{ github.workspace }}:/test
+        - ${{ github.workspace }}/linux:/linux
 
     steps:
       - uses: actions/checkout@v4
@@ -18,6 +21,16 @@ jobs:
       - name: Install deps
         run: |
           zypper --non-interactive in python311-pytest
+      - name: Linux repo
+        uses: actions/checkout@v4
+        with:
+          # Github mirror
+          repository: torvalds/linux
+          path: linux
+          ref: v6.19-rc1
+          # 362432e9b9aef ("scsi: libsas: Add rollback handling when an error occurs") v6.19-rc1~1^2~1
+          fetch-depth: 10
+          # XXX 8db816c6f1763 ("scsi: st: Tighten the page format heuristics with MODE SELECT") v6.15-rc1~164^2
       - name: Run tests
         run: |
           python3 -m pytest -v test
