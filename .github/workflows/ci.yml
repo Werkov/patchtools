@@ -15,6 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install deps
+        run: |
+          zypper in python311-pytest
       - name: Run tests
         run: |
           python3 -m pytest -v test
