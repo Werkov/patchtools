@@ -20,7 +20,7 @@ jobs:
 
       - name: Install deps
         run: |
-          zypper --non-interactive in python311-pytest
+          zypper --non-interactive in python311-pytest git-core
       - name: Linux repo
         uses: actions/checkout@v4
         with:
