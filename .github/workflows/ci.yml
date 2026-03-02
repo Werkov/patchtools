@@ -17,7 +17,7 @@ jobs:
 
       - name: Install deps
         run: |
-          zypper in python311-pytest
+          zypper --non-interactive in python311-pytest
       - name: Run tests
         run: |
           python3 -m pytest -v test
