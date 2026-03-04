@@ -36,6 +36,9 @@ class Config:
     def __init__(self):
         # Set some sane defaults
         self.repos = [ os.getcwd() ]
+        linux_git_dir = os.getenv('LINUX_GIT')
+        if linux_git_dir:
+            self.repos.append(linux_git_dir)
         self.mainline_repos = MAINLINE_URLS
         self.merge_mainline_repos()
         self.email = get_git_config(os.getcwd(), "user.email")
