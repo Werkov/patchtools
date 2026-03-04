@@ -31,8 +31,8 @@ jobs:
           # 362432e9b9aef ("scsi: libsas: Add rollback handling when an error occurs") v6.19-rc1~1^2~1
           # fetch-depth: 10
           # XXX 8db816c6f1763 ("scsi: st: Tighten the page format heuristics with MODE SELECT") v6.15-rc1~164^2
-          # 8db816c6f1763 to v6.19-rc1 is around 76146 commits
-          fetch-depth: 80000
+          # 8db816c6f1763 to v6.19-rc1 is around 76146 commits but take all of them
+          fetch-depth: 0
       - name: Run tests
         run: |
           python3 -m pytest -v test
